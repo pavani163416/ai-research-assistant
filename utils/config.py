@@ -8,7 +8,7 @@ CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", 100))
 TOP_K = int(os.getenv("TOP_K", 5))
 
 # Models Configuration
-EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "models/gemini-embedding-2")
+EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "all-MiniLM-L6-v2")
 LLM_MODEL = os.getenv("LLM_MODEL", "gemini-2.5-flash")
 
 # Storage Paths
