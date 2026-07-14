@@ -71,9 +71,12 @@ with st.sidebar:
 
                 result = rag.process_document(save_path)
 
-            st.session_state.document_ready = True
-            st.session_state.document_name = uploaded_file.name
-            st.session_state.chunks = result["chunks"]
+            if result.get("status") == "error":
+                st.error(result.get("message", "An error occurred during document processing."))
+            else:
+                st.session_state.document_ready = True
+                st.session_state.document_name = uploaded_file.name
+                st.session_state.chunks = result.get("chunks", 0)
 
         st.success("✅ Document Ready")
 
