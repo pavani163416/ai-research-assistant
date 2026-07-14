@@ -14,11 +14,17 @@ class GeminiChat:
     def __init__(self):
 
         api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            try:
+                import streamlit as st
+                api_key = st.secrets.get("GEMINI_API_KEY")
+            except Exception:
+                pass
 
         print("Loaded API Key:", api_key)   # Temporary debugging
 
         if not api_key:
-            raise ValueError("Gemini API key not found.")
+            raise ValueError("Gemini API key not found. Please ensure it's set in .env or Streamlit Secrets.")
 
         genai.configure(api_key=api_key)
 

@@ -13,7 +13,15 @@ class EmbeddingModel:
     def __init__(self):
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
-            raise ValueError("Gemini API key not found.")
+            try:
+                import streamlit as st
+                api_key = st.secrets.get("GEMINI_API_KEY")
+            except Exception:
+                pass
+
+        if not api_key:
+            raise ValueError("Gemini API key not found. Please ensure it's set in .env or Streamlit Secrets.")
+
         genai.configure(api_key=api_key)
         self.model_name = EMBEDDING_MODEL
 
